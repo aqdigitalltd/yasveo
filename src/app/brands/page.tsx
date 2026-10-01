@@ -57,7 +57,7 @@ const BrandsPage = () => (
       description="Four quick fields are enough to start. We'll reply by email to talk through your brand and what you'd like to achieve, and pick up budget, timings and the rest of the detail from there."
       form={<BrandEnquiryForm />}
     />
-    <Faq title="Questions brands ask us." items={brandFaqs} action={brandAction} />
+    <Faq title="Questions brands ask us." items={brandFaqs} />
   </>
 );
 

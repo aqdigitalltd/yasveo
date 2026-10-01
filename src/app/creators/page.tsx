@@ -63,7 +63,7 @@ const CreatorsPage = () => (
       description="One profile and a line about your content is all we need to start. We'll take a look at what you create and get in touch where there's a suitable fit."
       form={<CreatorApplicationForm />}
     />
-    <Faq title="Questions creators ask us." items={creatorFaqs} action={creatorAction} />
+    <Faq title="Questions creators ask us." items={creatorFaqs} />
   </>
 );
 
