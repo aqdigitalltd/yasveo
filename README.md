@@ -2,14 +2,14 @@
 
 Website for YASVEO, a creator partnership business that connects brands and creators through relevance, authenticity and shared ambition.
 
-The visual direction is the approved **Concept 2 (Premium Minimal)** from `influence-agency-concepts`, developed into a brand system built on the YASVEO logo.
+It is a simple, conversion-focused campaign site: a neutral entry page that routes visitors to a Brands or a Creators landing page, each ending in a four-field form. The brand system is built on the YASVEO logo.
 
 ## Stack
 
 - Next.js 16 (App Router, TypeScript, React 19)
 - Tailwind CSS v4, with design tokens in `src/app/globals.css`
 - React Hook Form for the enquiry and application forms
-- `next/font` (Urbanist, Lexend Exa, Instrument Serif) and `next/image`
+- `next/font` (Lexend Exa, Inter) and `next/image`
 
 ## Getting started
 
@@ -37,83 +37,87 @@ npm run dev                  # http://localhost:3000
 
 ## Pages
 
-| Route | Purpose |
-| --- | --- |
-| `/` | Home: what we do, the fit proposition, the Brand and Creator routes, how it works, and a final CTA |
-| `/brands` | Why fit matters, how it works, what we handle, and the enquiry form (`#enquire`) |
-| `/creators` | What we look for, how it works, our promise, and the application form (`#apply`) |
+The site is a campaign-style conversion site. **One section = one message. One page = one conversion goal.**
+
+| Route | Goal | Contents |
+| --- | --- | --- |
+| `/` | Send the visitor to the right funnel | One headline, one sentence and two routes: "I'm a Brand" and "I'm a Creator". Nothing else |
+| `/brands` | A brand submits the enquiry form (`#enquire`) | Hero, "Followers don't tell the whole story", what we look for, three steps, the form, FAQ |
+| `/creators` | A creator submits their details (`#join`) | Hero, "The right audience can matter more", why YASVEO, three steps, the form, FAQ |
+
+Before adding a section, ask: does it help the visitor understand the proposition or move toward the form? If not, leave it out. SEO copy belongs on `/brands` and `/creators` (including their FAQs), not on the home page.
+
+**Calls to action.** Each audience page uses one CTA phrase everywhere, set in `src/config/SiteConfig.ts`: **Find creators** on `/brands` and **Join YASVEO** on `/creators`. Both lead to that page's form. Don't introduce other labels ("Learn more", "Get started"). The brand form's submit button reads **Let's talk**.
+
+**Forms.** Both forms have four fields only, to keep friction low. Budget, dates, platforms and similar detail are collected after the first conversation. The creator form deliberately doesn't ask for follower count, because the site's positioning is relevance over follower numbers.
+
+**Copy rules.** No invented campaign figures: the large/smaller following comparison on `/brands` is labelled as an illustration. Nothing on `/creators` promises work, income or acceptance.
 
 ## Design system
-
-The site keeps Concept 2's premium feel but puts comprehension first. Each section answers one question: an eyebrow, one heading, short copy and, where it makes sense, one action.
 
 **Colour tokens** (Tailwind classes such as `bg-mist` and `text-graphite`):
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `ink` | `#0A0A0A` | Primary text; dark sections, the footer |
-| `charcoal` | `#1E1E1E` | Dark hover states; an alternate dark section |
+| `ink` | `#0A0A0A` | Primary text; the dark section on each audience page; the footer |
 | `white` | `#FFFFFF` | Main background |
-| `mist` | `#F4F4F3` | Light grey alternate sections and cards |
+| `mist` | `#F4F4F3` | Light grey alternate section ("How it works") |
 | `graphite` | `#3A3A3A` | Supporting copy |
 | `muted` | `#5E5E5E` | Hints and captions |
-| `accent` | `#AB4522` | Muted terracotta, used sparingly: CTA underlines, eyebrow dashes, checks, focus |
+| `accent` | `#AB4522` | Terracotta. Every primary CTA, plus focus rings, eyebrow rules and step numbers |
 | `accent-hover` | `#8E3719` | Hover state for the accent |
-| `accent-light` | `#E48A64` | The accent on ink and charcoal |
-| `error` / `success` | `#B3261E` / `#3D6B3A` | Form states |
+| `accent-light` | `#E48A64` | The accent as text on ink |
+| `accent-wash` | `#F9EEE9` | Pale accent behind the form section |
+| `error` | `#B3261E` | Form errors |
 
-**Type:**
+The accent's job is to guide attention, so it stays off large areas other than the CTAs and the form wash.
 
-- **Headings:** Lexend Exa Light (`display-*`, `heading-*`). Its wide, geometric forms echo the logo's lettering.
-- **Body copy:** Urbanist (`body-lg` and the base text), for readability.
-- **Labels, navigation and buttons:** Lexend Exa, via `eyebrow`, `label-nav` and `label-button`.
-- **Emphasis:** Instrument Serif italic stays as the Concept 2 device. Wrap the key phrase of a heading in `<em>`, at most once per heading:
+**Type:** two faces only.
 
-```tsx
-<h2 className="display-md">
-  A bigger audience isn&apos;t always <em>a better one.</em>
-</h2>
-```
+- **Lexend Exa** for headings, navigation, buttons and small labels (`display-*`, `heading-*`, `eyebrow`, `label-nav`, `label-button`). Its wide, geometric forms echo the logo's lettering.
+- **Inter** for body copy and form fields (`body-lg` and the base text).
 
-**Calls to action:**
+There is no serif and no italic emphasis device.
 
-- **Links:** Concept 2's underlined links (`ButtonLink`). A 2px terracotta underline sweeps away on hover while the arrow moves on. `variant="secondary"` gives a grey underline, and `size="sm"` is the header version.
-- **Form submits:** these stay solid black rectangles (`Button`), so they read unmistakably as buttons.
-- **Corners:** 2px throughout (`rounded-xs`), to match the logo's crisp geometry.
+**Imagery:** one photo per audience page (the hero) and none on the home page. Don't add an image to fill space.
+
+**Motion:** hover transitions only. There are no scroll reveals or entrance animations.
+
+**Corners:** 2px throughout (`rounded-xs`), to match the logo's crisp geometry.
 
 **Shared patterns:**
 
-- `PageHero`: copy and actions beside Concept 2's overlapping photo pair (main and inset) with a "Fig. 0x" caption. The serif line of the headline is indented on desktop.
-- `SectionIntro`: eyebrow, heading and copy. Left-aligned intros carry Concept 2's hairline across the row.
-- `HowItWorks`: three steps with serif italic numerals (i. ii. iii.), identical on every page.
-- `CheckList`
-- `FormLayout`: a grey section with the form in a white card.
-
-**Motion** is limited to the hero entrance and a curtain lift on a few key photos (hero pair, route cards, "What we look after"). It's disabled for reduced motion.
+- `ButtonLink` / `Button`: the one CTA style, a solid terracotta button.
+- `PageHero`: eyebrow, `h1`, one sentence, the CTA and the page's photo.
+- `SectionIntro`: eyebrow, heading and optional copy.
+- `PointsSection`: a heading and three plain points in a row. Used for "what we look for" and, with `numbered`, for "how it works".
+- `FormLayout`: the intro beside the form card, on the accent wash.
+- `Faq`: native `<details>` questions with `FAQPage` structured data.
 
 ## Project structure
 
 ```text
 src/
-  app/                   Routes, metadata, sitemap, robots, icons, social images
-  sections/<Page>/       Page-specific editorial compositions (Home, Brands, Creators)
-  components/<Name>/     Shared UI: PageHero, Section, SectionIntro, HowItWorks, CheckList, Button,
-                         Photo, Logo, FormLayout, FormControls, BrandEnquiryForm, CreatorApplicationForm
-  layout/                Header (with mobile menu) and Footer
-  content/               Copy lists, image catalogue, form fields (labels, options, validation)
-  config/SiteConfig.ts   Business name, tagline, domain, email, social links, navigation
+  app/                   Routes, metadata, sitemap, robots, icons
+  sections/<Page>/       Page-specific sections: Home/AudienceRouter, Brands/FollowerStory, Creators/RightAudience
+  components/<Name>/     Shared UI: PageHero, Section, SectionIntro, PointsSection, Faq, Button, Photo, Logo,
+                         FormLayout, FormControls, BrandEnquiryForm, CreatorApplicationForm
+  layout/                Header and Footer
+  content/               Page copy (points, steps, FAQs), the image catalogue, form fields
+  config/SiteConfig.ts   Business name, tagline, domain, email, social links, navigation, CTA labels
   services/              Form submission boundary
-  hooks/Hooks.tsx        Custom hooks
   types/                 Shared types
-  utils/Utils.ts         Pure helpers (metadata, paths, numbering)
+  utils/Utils.ts         Pure helpers (metadata, paths, structured data)
 public/brand/            Logo files (SVG mark and wordmark, original JPG)
 ```
 
 ## Common changes
 
 - **Business details** (domain, email, social profiles): `src/config/SiteConfig.ts`. The footer and structured data pick up the email and social links automatically once they're set.
-- **Images:** all photography is listed in `src/content/Images.ts`. Replace a `src` (for example `/images/hero.jpg` in `public/`) and update its `alt`. The current images are Unsplash placeholders.
-- **Form fields:** add the field to the values type in `src/types/forms.ts`, add its label, default and rule in `src/content/FormFields.ts`, then render it in the form component. Submitted emails pick up the label automatically.
+- **CTA labels and targets:** `brandAction` and `creatorAction` in `src/config/SiteConfig.ts`.
+- **Page copy:** hero and section headings are in `src/app/brands/page.tsx` and `src/app/creators/page.tsx`; points, steps and FAQs are in `src/content/`.
+- **Images:** the two photos are listed in `src/content/Images.ts`. Replace a `src` (for example `/images/hero.jpg` in `public/`) and update its `alt`. The current images are Unsplash placeholders.
+- **Form fields:** labels, placeholders and validation are in `src/content/FormFields.ts`. Think twice before adding a field: add it to the values type in `src/types/forms.ts`, then to `FormFields.ts`, then render it in the form component. Submitted emails pick up the label automatically.
 - **Connecting the forms:** replace the mock in `src/services/FormDelivery.ts`, the only file that talks to a provider. It receives `{ form, subject, replyTo, fields: [{ label, value }] }`. The comments there sketch EmailJS and server-side alternatives.
 
 ## Deployment (GitHub Pages client preview)

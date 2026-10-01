@@ -7,9 +7,6 @@ import type { SeoType } from "@/types/content";
 /** Strips a trailing slash so "/brands/" and "/brands" compare equal ("/" is kept). */
 export const normalisePath = (path: string): string => path.replace(/(.)\/$/, "$1");
 
-/** "/#process" → "/", "/brands" → "/brands". */
-export const getPathname = (href: string): string => normalisePath(href.split("#")[0] || "/");
-
 /** "/brands" → "/brands/" to match the static export's trailingSlash; files ("/og-image.png") are left alone. */
 const withTrailingSlash = (path: string): string => (path.endsWith("/") || /\.\w+$/.test(path) ? path : `${path}/`);
 
@@ -48,10 +45,3 @@ export const buildMetadata = ({ title, description, path }: SeoType): Metadata =
 
 /** Serialises structured data for a <script type="application/ld+json"> tag. */
 export const serialiseJsonLd = (data: object): string => JSON.stringify(data).replace(/</g, "\\u003c");
-
-/* -------------------------------- Numbering ------------------------------- */
-
-const romanNumerals = ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"];
-
-/** 0 → "i." (serif step numerals, up to ten items). */
-export const toRoman = (index: number): string => `${romanNumerals[index] ?? index + 1}.`;

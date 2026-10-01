@@ -1,69 +1,53 @@
-import { images } from "@/content/Images";
-import type { ImageAssetType, PointType } from "@/types/content";
+import type { FaqItemType, PointType } from "@/types/content";
 
-export type CreatorQualityType = PointType & {
-  /** The kind of creator pictured, shown as the post's author line. */
-  niche: string;
-  format: string;
-  image: ImageAssetType;
-};
-
-export const creatorQualities: CreatorQualityType[] = [
+export const creatorReasons: PointType[] = [
   {
-    title: "A clear point of view",
-    description: "You know what your content is about, and your audience knows why they follow you.",
-    niche: "Food",
-    format: "Video",
-    image: images.foodCreator,
+    title: "Your content",
+    description: "We look for brands that suit what you already make, so a partnership feels natural to post.",
   },
   {
-    title: "An audience that trusts you",
-    description: "Genuine, engaged relationships matter more to us than the size of your following.",
-    niche: "Fashion",
-    format: "Try-on",
-    image: images.fashionCreator,
+    title: "Your audience",
+    description: "The right brand is one the people who watch you would genuinely care about.",
   },
   {
-    title: "Care in what you make",
-    description: "Considered work, whatever the format, platform or niche.",
-    niche: "Travel",
-    format: "Photo",
-    image: images.travelShoot,
-  },
-  {
-    title: "Honesty with your audience",
-    description: "Partnerships disclosed clearly, and only for things you'd genuinely stand behind.",
-    niche: "Podcast",
-    format: "Audio",
-    image: images.podcastHost,
+    title: "Your style",
+    description: "You know your voice. A good partnership leaves room for it.",
   },
 ];
 
+// Nothing here promises work: opportunities depend on there being a suitable fit.
 export const creatorSteps: PointType[] = [
   {
     title: "Tell us about you",
-    description: "Share what you create, where you post and who your content is for. It takes a few minutes.",
+    description: "Share your main social profile and what you create.",
   },
   {
-    title: "We get to know your work",
-    description: "If there could be a fit, we'll arrange a chat to understand your niche and your audience properly.",
+    title: "We get to know your content",
+    description: "We look at your content, your audience and the kinds of partnerships that could make sense.",
   },
   {
-    title: "Hear about the right briefs",
-    description: "When a brand opportunity suits you, we bring it to you with the reasoning behind it. You decide.",
+    title: "Relevant opportunities",
+    description: "Where there's a suitable fit, we can explore bringing you and the right brand together.",
   },
 ];
 
-export const creatorPromises = [
-  "Opportunities chosen for how well they fit your content",
-  "Briefs that leave room for your voice",
-  "The fee, usage and timelines agreed before you commit",
-  "Someone to talk to throughout a partnership",
-  "Saying no is always fine",
-];
-
-export const applicationNextSteps = [
-  "We look at every application properly.",
-  "If there's a potential fit, we'll arrange a chat.",
-  "We'll get in touch when a relevant opportunity comes up.",
+export const creatorFaqs: FaqItemType[] = [
+  {
+    question: "Do I need a minimum number of followers?",
+    answer:
+      "No. We don't set a follower minimum. We look at your content, who watches it and how relevant that audience is to a brand.",
+  },
+  {
+    question: "Which platforms do you work with?",
+    answer: "TikTok, Instagram, YouTube and others. Share the profile where you're most active.",
+  },
+  {
+    question: "Does joining guarantee brand partnerships?",
+    answer:
+      "No. Joining means we can consider you when a brand is looking for a creator like you. We get in touch where there's a suitable fit.",
+  },
+  {
+    question: "Do I have to say yes to an opportunity?",
+    answer: "No. You decide which partnerships are right for you and your audience.",
+  },
 ];

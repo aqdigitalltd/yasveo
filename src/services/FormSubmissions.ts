@@ -1,31 +1,31 @@
-import { brandEnquiryLabels, creatorApplicationLabels } from "@/content/FormFields";
+import { brandEnquiryFields, creatorApplicationFields } from "@/content/FormFields";
 import { deliverSubmission } from "@/services/FormDelivery";
-import type { BrandEnquiryValuesType, CreatorApplicationValuesType, SubmissionFieldType } from "@/types/forms";
+import type {
+  BrandEnquiryValuesType,
+  CreatorApplicationValuesType,
+  FieldCopyType,
+  SubmissionFieldType,
+} from "@/types/forms";
 
-const formatValue = (value: string | string[]): string =>
-  (Array.isArray(value) ? value.join(", ") : value).trim();
-
-/** Pairs each answer with its form label, in label order, leaving out unanswered optional fields. */
+/** Pairs each answer with its form label, in field order. */
 const toSubmissionFields = (
-  values: Record<string, string | string[]>,
-  labels: Record<string, string>,
+  values: Record<string, string>,
+  fields: Record<string, FieldCopyType>,
 ): SubmissionFieldType[] =>
-  Object.entries(labels)
-    .map(([name, label]) => ({ label, value: formatValue(values[name] ?? "") }))
-    .filter((field) => field.value !== "");
+  Object.entries(fields).map(([name, { label }]) => ({ label, value: (values[name] ?? "").trim() }));
 
 export const submitBrandEnquiry = (values: BrandEnquiryValuesType): Promise<void> =>
   deliverSubmission({
     form: "brand-enquiry",
     subject: `Brand enquiry: ${values.company.trim()}`,
     replyTo: values.email.trim(),
-    fields: toSubmissionFields(values, brandEnquiryLabels),
+    fields: toSubmissionFields(values, brandEnquiryFields),
   });
 
 export const submitCreatorApplication = (values: CreatorApplicationValuesType): Promise<void> =>
   deliverSubmission({
     form: "creator-application",
-    subject: `Creator application: ${values.firstName.trim()} ${values.lastName.trim()}`,
+    subject: `Creator application: ${values.name.trim()}`,
     replyTo: values.email.trim(),
-    fields: toSubmissionFields(values, creatorApplicationLabels),
+    fields: toSubmissionFields(values, creatorApplicationFields),
   });

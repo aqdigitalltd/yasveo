@@ -1,23 +1,18 @@
-import type { ReactNode } from "react";
-
 // Moves focus to the confirmation so screen reader and keyboard users land on it.
 const focusOnMount = (node: HTMLDivElement | null) => node?.focus();
 
 export interface IFormSuccess {
-  title: ReactNode;
+  title: string;
   message: string;
 }
 
 export const FormSuccess = ({ title, message }: IFormSuccess) => (
-  <div ref={focusOnMount} tabIndex={-1} role="status" className="py-6 outline-none sm:py-10">
-    <span
-      aria-hidden
-      className="flex size-12 items-center justify-center rounded-xs bg-accent text-xl text-white"
-    >
+  <div ref={focusOnMount} tabIndex={-1} role="status" className="py-4 outline-none sm:py-8">
+    <span aria-hidden className="flex size-12 items-center justify-center rounded-xs bg-accent text-xl text-white">
       ✓
     </span>
-    <p className="display-md mt-8 max-w-[18ch]">{title}</p>
-    <p className="body-lg mt-5 max-w-[44ch] text-graphite">{message}</p>
+    <p className="heading-lg mt-7">{title}</p>
+    <p className="mt-4 max-w-[44ch] text-graphite">{message}</p>
   </div>
 );
 
@@ -31,18 +26,3 @@ export const FormError = ({ message }: IFormError) =>
       {message}
     </p>
   ) : null;
-
-export interface IFormStep {
-  title: string;
-  description?: string;
-  children: ReactNode;
-}
-
-/** A titled group of related fields. */
-export const FormStep = ({ title, description, children }: IFormStep) => (
-  <fieldset>
-    <legend className="heading-md">{title}</legend>
-    {description && <p className="mt-1 text-muted">{description}</p>}
-    <div className="mt-6 grid gap-x-5 gap-y-6 sm:grid-cols-2">{children}</div>
-  </fieldset>
-);

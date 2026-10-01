@@ -2,52 +2,29 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useRef, useState, type KeyboardEvent } from "react";
 import { ButtonLink } from "@/components/Button/Button";
 import { LogoWordmark } from "@/components/Logo/Logo";
-import { headerAction, primaryNavigation, siteConfig } from "@/config/SiteConfig";
-import { useHasScrolled } from "@/hooks/Hooks";
-import { getPathname, normalisePath } from "@/utils/Utils";
-import { MenuToggle, MobileMenu } from "./MobileMenu";
+import { pageActions, primaryNavigation, siteConfig } from "@/config/SiteConfig";
+import { normalisePath } from "@/utils/Utils";
 
+// The logo, the two audience links, and the current page's CTA. On phones the links give way to
+// the CTA: the home page's own routes and the footer cover switching audience.
 export const Header = () => {
   const pathname = normalisePath(usePathname());
-  const hasScrolled = useHasScrolled();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleRef = useRef<HTMLButtonElement>(null);
-
-  const isSolid = hasScrolled && !isMenuOpen;
-
-  const toggleMenu = useCallback(() => setIsMenuOpen((open) => !open), [setIsMenuOpen]);
-  const closeMenu = useCallback(() => setIsMenuOpen(false), [setIsMenuOpen]);
-
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent) => {
-      if (event.key !== "Escape") return;
-      setIsMenuOpen(false);
-      toggleRef.current?.focus();
-    },
-    [setIsMenuOpen],
-  );
+  const pageAction = pageActions[pathname];
 
   return (
-    <>
-      <header
-        data-tone={isMenuOpen ? "ink" : undefined}
-        onKeyDown={handleKeyDown}
-        className={`fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,padding] duration-500 ${
-          isSolid ? "border-line bg-white/95 py-3 backdrop-blur-md" : "border-transparent py-5"
-        } ${isMenuOpen ? "text-white" : "text-ink"}`}
-      >
-        <div className="mx-auto grid max-w-[calc(80rem+2*var(--spacing-gutter))] grid-cols-[1fr_auto] items-center gap-8 px-gutter lg:grid-cols-[1fr_auto_1fr]">
-          <Link href="/" className="justify-self-start py-2" onClick={closeMenu}>
-            <LogoWordmark label={`${siteConfig.name} home`} className="h-3.5 w-auto sm:h-4" />
-          </Link>
+    <header className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur-md">
+      <div className="mx-auto flex h-header max-w-[calc(80rem+2*var(--spacing-gutter))] items-center justify-between gap-4 px-gutter">
+        <Link href="/" className="py-2">
+          <LogoWordmark label={`${siteConfig.name} home`} className="h-3 w-auto sm:h-4" />
+        </Link>
 
-          <nav aria-label="Main" className="hidden lg:block">
+        <div className="flex items-center gap-10">
+          <nav aria-label="Main" className="hidden md:block">
             <ul className="flex items-center gap-10">
               {primaryNavigation.map((item) => {
-                const isActive = !item.href.includes("#") && getPathname(item.href) === pathname;
+                const isActive = item.href === pathname;
 
                 return (
                   <li key={item.href}>
@@ -66,17 +43,13 @@ export const Header = () => {
             </ul>
           </nav>
 
-          <div className="hidden justify-self-end lg:block">
-            <ButtonLink href={headerAction.href} size="sm" withArrow={false}>
-              {headerAction.label}
+          {pageAction && (
+            <ButtonLink href={pageAction.href} size="sm" withArrow={false}>
+              {pageAction.label}
             </ButtonLink>
-          </div>
-
-          <MenuToggle ref={toggleRef} isOpen={isMenuOpen} onToggle={toggleMenu} />
+          )}
         </div>
-      </header>
-
-      <MobileMenu isOpen={isMenuOpen} onClose={closeMenu} onKeyDown={handleKeyDown} />
-    </>
+      </div>
+    </header>
   );
 };

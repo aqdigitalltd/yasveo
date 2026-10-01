@@ -4,14 +4,15 @@ export type ImageAssetType = {
   alt: string;
 };
 
-/** A short titled point: values, principles, process steps, checklist items. */
+/** A short titled point: what we look for, process steps. */
 export type PointType = {
   title: string;
   description: string;
 };
 
-export type ServiceType = PointType & {
-  image: ImageAssetType;
+export type FaqItemType = {
+  question: string;
+  answer: string;
 };
 
 export type SeoType = {

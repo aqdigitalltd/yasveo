@@ -1,26 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Lexend_Exa, Urbanist } from "next/font/google";
+import { Inter, Lexend_Exa } from "next/font/google";
 import { allowIndexing, siteConfig } from "@/config/SiteConfig";
 import { Footer } from "@/layout/Footer/Footer";
 import { Header } from "@/layout/Header/Header";
 import { getAbsoluteUrl, serialiseJsonLd } from "@/utils/Utils";
 import "./globals.css";
 
-const urbanist = Urbanist({
-  variable: "--font-urbanist",
+// Two faces only: Lexend Exa for brand moments (headings, navigation, buttons, labels), Inter for reading.
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
 const lexendExa = Lexend_Exa({
   variable: "--font-lexend-exa",
   subsets: ["latin"],
-});
-
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  subsets: ["latin"],
-  weight: "400",
-  style: "italic",
 });
 
 export const metadata: Metadata = {
@@ -61,7 +55,7 @@ const organisationJsonLd = {
 };
 
 const RootLayout = ({ children }: LayoutProps<"/">) => (
-  <html lang="en-GB" className={`${urbanist.variable} ${lexendExa.variable} ${instrumentSerif.variable}`}>
+  <html lang="en-GB" className={`${inter.variable} ${lexendExa.variable}`}>
     <body className="flex min-h-screen flex-col">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serialiseJsonLd(organisationJsonLd) }} />
       <a
@@ -71,7 +65,7 @@ const RootLayout = ({ children }: LayoutProps<"/">) => (
         Skip to content
       </a>
       <Header />
-      <main id="main" className="flex-1">
+      <main id="main" className="flex flex-1 flex-col">
         {children}
       </main>
       <Footer />

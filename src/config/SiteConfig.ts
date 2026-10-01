@@ -7,7 +7,7 @@ export const siteConfig: SiteConfigType = {
   name: "YASVEO",
   tagline: "Global creator network",
   description:
-    "YASVEO connects brands and creators through relevance, authenticity and shared ambition: partnerships chosen for fit, not follower count.",
+    "YASVEO connects brands and creators through audience, content and genuine relevance: creator partnerships built on the right fit, not follower count.",
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.yasveo.com").replace(/\/$/, ""),
   locale: "en_GB",
   email: undefined,
@@ -28,7 +28,14 @@ export const socialImage = {
 export const primaryNavigation: NavItemType[] = [
   { label: "For Brands", href: "/brands" },
   { label: "For Creators", href: "/creators" },
-  { label: "How it works", href: "/#how-it-works" },
 ];
 
-export const headerAction: NavItemType = { label: "Get started", href: "/#get-started" };
+// One CTA phrase per audience page, repeated wherever that page asks for action. Each leads to the page's form.
+export const brandAction: NavItemType = { label: "Find creators", href: "/brands#enquire" };
+export const creatorAction: NavItemType = { label: "Join YASVEO", href: "/creators#join" };
+
+/** The header's CTA on each audience page. The home page has none: its two routes are the action. */
+export const pageActions: Partial<Record<string, NavItemType>> = {
+  "/brands": brandAction,
+  "/creators": creatorAction,
+};

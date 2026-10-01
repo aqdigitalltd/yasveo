@@ -1,29 +1,23 @@
+// Both forms capture a lead in four fields. Anything else is collected after the first conversation.
+
 export type BrandEnquiryValuesType = {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
   company: string;
-  website: string;
-  promoting: string;
-  partnershipTypes: string[];
-  budget: string;
-  timeframe: string;
-  goals: string;
-  additionalInfo: string;
+  message: string;
 };
 
 export type CreatorApplicationValuesType = {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
-  location: string;
-  primaryPlatform: string;
-  profileUrl: string;
-  otherProfiles: string;
-  audienceSize: string;
-  niches: string[];
-  contentDescription: string;
-  brandInterests: string;
+  profile: string;
+  content: string;
+};
+
+/** What a field shows: its label and its placeholder. */
+export type FieldCopyType = {
+  label: string;
+  placeholder: string;
 };
 
 export type FormName = "brand-enquiry" | "creator-application";
