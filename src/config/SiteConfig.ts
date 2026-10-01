@@ -7,7 +7,7 @@ export const siteConfig: SiteConfigType = {
   name: "YASVEO",
   tagline: "Global creator network",
   description:
-    "YASVEO connects brands and creators through audience, content and genuine relevance: creator partnerships built on the right fit, not follower count.",
+    "YASVEO connects brands and creators through audience, content and genuine relevance: partnerships built on the right fit, not follower count.",
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.yasveo.com").replace(/\/$/, ""),
   locale: "en_GB",
   email: undefined,

@@ -2,7 +2,7 @@ import type { ComponentProps } from "react";
 import { FieldWrapper } from "./FieldWrapper";
 
 export const fieldClassName =
-  "block w-full rounded-xs border border-line-strong bg-white px-4 py-3 text-base text-ink outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-muted/80 hover:border-ink/60 focus:border-ink focus:ring-2 focus:ring-accent aria-invalid:border-error";
+  "block w-full rounded-xs border border-line-strong bg-white px-4 py-3 text-base text-ink outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-muted/80 hover:border-accent/60 focus:border-accent focus:ring-3 focus:ring-accent/15 aria-invalid:border-error";
 
 export interface IInput extends ComponentProps<"input"> {
   id: string;

@@ -14,7 +14,7 @@ export const Header = () => {
   const pageAction = pageActions[pathname];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-line bg-bone/95 backdrop-blur-md">
       <div className="mx-auto flex h-header max-w-[calc(80rem+2*var(--spacing-gutter))] items-center justify-between gap-4 px-gutter">
         <Link href="/" className="py-2">
           <LogoWordmark label={`${siteConfig.name} home`} className="h-3 w-auto sm:h-4" />

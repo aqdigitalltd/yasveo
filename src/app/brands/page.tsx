@@ -1,12 +1,11 @@
 import { BrandEnquiryForm } from "@/components/BrandEnquiryForm/BrandEnquiryForm";
 import { Faq } from "@/components/Faq/Faq";
+import { FollowerComparison } from "@/components/FollowerComparison/FollowerComparison";
 import { FormLayout } from "@/components/FormLayout/FormLayout";
 import { PageHero } from "@/components/PageHero/PageHero";
 import { PointsSection } from "@/components/PointsSection/PointsSection";
 import { brandAction } from "@/config/SiteConfig";
-import { brandFaqs, brandSteps, fitSignals } from "@/content/BrandsContent";
-import { images } from "@/content/Images";
-import { FollowerStory } from "@/sections/Brands/FollowerStory";
+import { brandFaqs, brandSteps, fitSignals, followerComparison, followerStory } from "@/content/BrandsContent";
 import { buildMetadata } from "@/utils/Utils";
 
 export const metadata = buildMetadata({
@@ -22,15 +21,23 @@ const BrandsPage = () => (
     <PageHero
       eyebrow="For brands"
       title="Find creators who fit your brand."
-      description="YASVEO connects brands with creators based on genuine relevance between your brand, the creator, their content and the audience watching it."
+      description="YASVEO connects brands with creators based on genuine relevance: the right audience, real attention and content that fits. Tell us what you're looking for and we'll look for the creators who make sense for it."
       action={brandAction}
-      image={images.productTutorial}
+      note="Four quick fields. No commitment."
     />
-    <FollowerStory />
+    <FollowerComparison
+      id="followers"
+      eyebrow="The landscape has changed"
+      title="Followers don't tell the whole story."
+      paragraphs={followerStory}
+      statement="Reach matters. Relevance matters more."
+      comparison={followerComparison}
+    />
     <PointsSection
       id="what-matters"
       eyebrow="What matters instead"
-      title="What we look for in a creator."
+      title="Audience. Attention. Relevance."
+      description="If follower count isn't enough, what is? These are the three things we look at before suggesting a creator for your brand."
       points={fitSignals}
       action={brandAction}
     />
@@ -40,13 +47,14 @@ const BrandsPage = () => (
       title="Three steps to the right creators."
       points={brandSteps}
       numbered
-      bg="mist"
+      bg="paper"
+      lines="flow"
     />
     <FormLayout
       id="enquire"
       eyebrow={brandAction.label}
       title="Tell us what you're looking for."
-      description="Four quick fields are enough to start. We'll pick up the detail when we talk."
+      description="Four quick fields are enough to start. We'll reply by email to talk through your brand and what you'd like to achieve, and pick up budget, timings and the rest of the detail from there."
       form={<BrandEnquiryForm />}
     />
     <Faq title="Questions brands ask us." items={brandFaqs} action={brandAction} />

@@ -8,11 +8,6 @@ const nextConfig: NextConfig = {
   output: "export",
   basePath,
   trailingSlash: true,
-  images: {
-    // No image server on a static host: Unsplash resizes via URL parameters (see ImageLoader.ts).
-    loader: "custom",
-    loaderFile: "./src/utils/ImageLoader.ts",
-  },
 };
 
 export default nextConfig;

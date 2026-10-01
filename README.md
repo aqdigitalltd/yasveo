@@ -2,14 +2,14 @@
 
 Website for YASVEO, a creator partnership business that connects brands and creators through relevance, authenticity and shared ambition.
 
-It is a simple, conversion-focused campaign site: a neutral entry page that routes visitors to a Brands or a Creators landing page, each ending in a four-field form. The brand system is built on the YASVEO logo.
+It is a simple, conversion-focused campaign site: a neutral entry page that routes visitors to a Brands or a Creators landing page, each ending in a four-field form. The brand system is built on the YASVEO logo, with warm neutrals, one rust accent and no photography.
 
 ## Stack
 
 - Next.js 16 (App Router, TypeScript, React 19)
 - Tailwind CSS v4, with design tokens in `src/app/globals.css`
 - React Hook Form for the enquiry and application forms
-- `next/font` (Lexend Exa, Inter) and `next/image`
+- `next/font` (Lexend Exa, Inter)
 
 ## Getting started
 
@@ -41,11 +41,13 @@ The site is a campaign-style conversion site. **One section = one message. One p
 
 | Route | Goal | Contents |
 | --- | --- | --- |
-| `/` | Send the visitor to the right funnel | One headline, one sentence and two routes: "I'm a Brand" and "I'm a Creator". Nothing else |
-| `/brands` | A brand submits the enquiry form (`#enquire`) | Hero, "Followers don't tell the whole story", what we look for, three steps, the form, FAQ |
-| `/creators` | A creator submits their details (`#join`) | Hero, "The right audience can matter more", why YASVEO, three steps, the form, FAQ |
+| `/` | Send the visitor to the right funnel | One headline, one sentence and two route buttons, one solid and one outlined: "I'm a Brand" and "I'm a Creator". Nothing else |
+| `/brands` | A brand submits the enquiry form (`#enquire`) | Hero, "Followers don't tell the whole story", Audience / Attention / Relevance, three steps, the form, FAQ |
+| `/creators` | A creator submits their details (`#join`) | Hero, "The right audience can matter more", "Work with brands that fit", three steps, the form, FAQ |
 
-Before adding a section, ask: does it help the visitor understand the proposition or move toward the form? If not, leave it out. SEO copy belongs on `/brands` and `/creators` (including their FAQs), not on the home page.
+Before adding a section, ask: does it help the visitor understand the proposition or move toward the form? If not, leave it out. When a page feels thin, add useful copy **inside** an existing section rather than adding a section: five sections with substance beat nine with a sentence each. SEO copy belongs on `/brands` and `/creators` (including their FAQs), not on the home page.
+
+**The home page is neutral.** It is the entry point before we know who the visitor is, so its headline and copy must speak to brands and creators equally. Test any change with both questions: "If I'm a brand, does this speak to me?" and "If I'm a creator, does this speak to me?"
 
 **Calls to action.** Each audience page uses one CTA phrase everywhere, set in `src/config/SiteConfig.ts`: **Find creators** on `/brands` and **Join YASVEO** on `/creators`. Both lead to that page's form. Don't introduce other labels ("Learn more", "Get started"). The brand form's submit button reads **Let's talk**.
 
@@ -55,22 +57,37 @@ Before adding a section, ask: does it help the visitor understand the propositio
 
 ## Design system
 
-**Colour tokens** (Tailwind classes such as `bg-mist` and `text-graphite`):
+Warm neutrals with one accent. The hierarchy:
+
+- **Near-black:** the logo, primary type, the dark section on each audience page and the footer.
+- **Charcoal:** supporting text.
+- **Warm bone and paper:** backgrounds and surfaces.
+- **Rust:** interaction and emphasis (CTAs, borders, focus states, small highlights) and the background line work.
+
+**Colour tokens** (Tailwind classes such as `bg-paper` and `text-charcoal`):
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `ink` | `#0A0A0A` | Primary text; the dark section on each audience page; the footer |
-| `white` | `#FFFFFF` | Main background |
-| `mist` | `#F4F4F3` | Light grey alternate section ("How it works") |
-| `graphite` | `#3A3A3A` | Supporting copy |
+| `ink` | `#0A0A0A` | Primary text; the dark section; the footer |
+| `charcoal` | `#343434` | Supporting copy |
 | `muted` | `#5E5E5E` | Hints and captions |
-| `accent` | `#AB4522` | Terracotta. Every primary CTA, plus focus rings, eyebrow rules and step numbers |
-| `accent-hover` | `#8E3719` | Hover state for the accent |
-| `accent-light` | `#E48A64` | The accent as text on ink |
-| `accent-wash` | `#F9EEE9` | Pale accent behind the form section |
+| `bone` | `#F7F6F3` | The page background |
+| `paper` | `#EFEEEA` | Warm alternate section ("How it works") |
+| `white` | `#FFFFFF` | Form fields, the form card and outlined CTAs |
+| `accent` | `#C24E22` | Rust: CTAs, button borders, focus, eyebrow and point rules, the line work |
+| `accent-deep` | `#A8401A` | Hover on solid CTAs; small accent text on bone or paper (step numbers) |
+| `accent-light` | `#F0936B` | The accent as text and rules on the dark section |
+| `accent-soft` | `#FBEEE8` | Pale tint behind the form section |
 | `error` | `#B3261E` | Form errors |
 
-The accent's job is to guide attention, so it stays off large areas other than the CTAs and the form wash.
+**One accent, and it belongs to YASVEO.** Brands and creators do not get their own colours. A darker terracotta (`#AB4522`), a deep navy, and separate creator colours in teal and indigo were all tried and dropped.
+
+**Calls to action:**
+
+- **Home page routes:** two large buttons, not cards. "I'm a Brand" is solid rust; "I'm a Creator" is white with a rust border and text, filling on hover.
+- **Primary CTA** (both audience pages, identical): solid rust with white text; hover darkens to `accent-deep`.
+- **Outline** (`variant="outline"`): only beside a solid button as the second choice (the home page and the 404). Don't add secondary buttons otherwise.
+- **Form focus:** rust border with a faint rust ring.
 
 **Type:** two faces only.
 
@@ -79,31 +96,34 @@ The accent's job is to guide attention, so it stays off large areas other than t
 
 There is no serif and no italic emphasis device.
 
-**Imagery:** one photo per audience page (the hero) and none on the home page. Don't add an image to fill space.
+**Imagery:** there is no photography anywhere on the site, by client request. Personality comes from the type, the logo, the accent, spacing and the line work below.
+
+**Line work:** `ConnectionLines` draws faint SVG curves in the accent behind selected light sections: lines that move toward each other and meet, for brands and creators coming together. It is used on the three heroes (`converge`) and in the bottom padding of "How it works" (`flow`). Keep it to those: it is decoration at watermark strength and must never sit behind body copy.
 
 **Motion:** hover transitions only. There are no scroll reveals or entrance animations.
 
-**Corners:** 2px throughout (`rounded-xs`), to match the logo's crisp geometry.
+**Corners:** 4px on every CTA (`rounded-sm`: buttons and the home page routes); 2px on form fields and the form card (`rounded-xs`).
 
 **Shared patterns:**
 
-- `ButtonLink` / `Button`: the one CTA style, a solid terracotta button.
-- `PageHero`: eyebrow, `h1`, one sentence, the CTA and the page's photo.
+- `ButtonLink` / `Button`: the CTA, a solid rust button, with an `outline` variant and an `lg` size for the home page (see Calls to action).
+- `PageHero`: centred eyebrow, `h1`, supporting copy, the CTA and a line of reassurance.
 - `SectionIntro`: eyebrow, heading and optional copy.
-- `PointsSection`: a heading and three plain points in a row. Used for "what we look for" and, with `numbered`, for "how it works".
-- `FormLayout`: the intro beside the form card, on the accent wash.
-- `Faq`: native `<details>` questions with `FAQPage` structured data.
+- `FollowerComparison`: the dark section on each audience page, arguing that follower count isn't enough, with a two-column comparison.
+- `PointsSection`: a heading and three points in a row, each with two or three sentences. Used for "what matters" and, with `numbered`, for "how it works".
+- `FormLayout`: the intro beside the form card, on the soft accent tint.
+- `Faq`: questions that slide open (`FaqItem`, a button and a grid-row transition), with `FAQPage` structured data. Answers are always in the HTML.
 
 ## Project structure
 
 ```text
 src/
   app/                   Routes, metadata, sitemap, robots, icons
-  sections/<Page>/       Page-specific sections: Home/AudienceRouter, Brands/FollowerStory, Creators/RightAudience
-  components/<Name>/     Shared UI: PageHero, Section, SectionIntro, PointsSection, Faq, Button, Photo, Logo,
-                         FormLayout, FormControls, BrandEnquiryForm, CreatorApplicationForm
+  sections/Home/         AudienceRouter, the home page's one section
+  components/<Name>/     Shared UI: PageHero, Section, SectionIntro, FollowerComparison, PointsSection, Faq, Button,
+                         ConnectionLines, Logo, FormLayout, FormControls, BrandEnquiryForm, CreatorApplicationForm
   layout/                Header and Footer
-  content/               Page copy (points, steps, FAQs), the image catalogue, form fields
+  content/               Page copy (comparisons, points, steps, FAQs) and form fields
   config/SiteConfig.ts   Business name, tagline, domain, email, social links, navigation, CTA labels
   services/              Form submission boundary
   types/                 Shared types
@@ -116,8 +136,7 @@ public/brand/            Logo files (SVG mark and wordmark, original JPG)
 - **Business details** (domain, email, social profiles): `src/config/SiteConfig.ts`. The footer and structured data pick up the email and social links automatically once they're set.
 - **CTA labels and targets:** `brandAction` and `creatorAction` in `src/config/SiteConfig.ts`.
 - **Page copy:** hero and section headings are in `src/app/brands/page.tsx` and `src/app/creators/page.tsx`; points, steps and FAQs are in `src/content/`.
-- **Images:** the two photos are listed in `src/content/Images.ts`. Replace a `src` (for example `/images/hero.jpg` in `public/`) and update its `alt`. The current images are Unsplash placeholders.
-- **Form fields:** labels, placeholders and validation are in `src/content/FormFields.ts`. Think twice before adding a field: add it to the values type in `src/types/forms.ts`, then to `FormFields.ts`, then render it in the form component. Submitted emails pick up the label automatically.
+- **Form fields:** labels, placeholders and validation are in `src/content/FormFields.ts`. Think twice before adding a field: add it to the values type in `src/types/forms.ts`, then to `FormFields.ts`, then render it in the form component. Submitted emails pick up the label automatically. Each field reserves one line for its error message so the form doesn't jump, so keep messages short enough to fit on a phone.
 - **Connecting the forms:** replace the mock in `src/services/FormDelivery.ts`, the only file that talks to a provider. It receives `{ form, subject, replyTo, fields: [{ label, value }] }`. The comments there sketch EmailJS and server-side alternatives.
 
 ## Deployment (GitHub Pages client preview)
@@ -135,6 +154,5 @@ What the build does:
 - **Base path:** it builds for the `/yasveo/` subpath, so links, fonts and icons work on a project site. If the repository has a different name or owner, update `NEXT_PUBLIC_BASE_PATH` and `NEXT_PUBLIC_SITE_URL` in the `build:pages` script.
 - **Hidden from search:** the preview carries `noindex, nofollow` and a disallowing `robots.txt`.
 - **`.nojekyll`:** this is included in `docs/` (from `public/`), so GitHub doesn't hide the `_next/` folder.
-- **Images:** they use a custom loader (`src/utils/ImageLoader.ts`), because a static host has no image server. Unsplash resizes images through URL parameters.
 
 **Going live later:** run a plain `npm run build` with `NEXT_PUBLIC_SITE_URL` set to the real domain, leave `NEXT_PUBLIC_BASE_PATH` empty and set `NEXT_PUBLIC_ALLOW_INDEXING=true`. Then deploy `out/` to the chosen host.

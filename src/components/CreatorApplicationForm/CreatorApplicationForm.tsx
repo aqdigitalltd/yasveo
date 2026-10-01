@@ -47,8 +47,8 @@ export const CreatorApplicationForm = () => {
   }
 
   return (
-    <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-      <div className="grid gap-5 sm:grid-cols-2">
+    <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+      <div className="grid gap-x-5 gap-y-2 sm:grid-cols-2">
         <Input
           id="creator-name"
           label={fields.name.label}
@@ -87,10 +87,10 @@ export const CreatorApplicationForm = () => {
 
       <FormError message={errors.root?.message} />
 
-      <Button type="submit" withArrow disabled={isSubmitting} aria-busy={isSubmitting} className="mt-2 w-full">
+      <Button type="submit" withArrow disabled={isSubmitting} aria-busy={isSubmitting} className="mt-1 w-full">
         {isSubmitting ? "Sending…" : creatorAction.label}
       </Button>
-      <p className="text-sm text-muted">
+      <p className="mt-2 text-sm text-muted">
         Joining doesn&apos;t commit you to anything. We&apos;ll only use these details to get in touch.
       </p>
     </form>

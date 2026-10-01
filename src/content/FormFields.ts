@@ -3,6 +3,7 @@ import type { BrandEnquiryValuesType, CreatorApplicationValuesType, FieldCopyTyp
 // Labels, placeholders, starting values and validation for both forms. Each form is deliberately
 // four fields: its job is to capture the lead, not to onboard. To add a field: add it to the values
 // type in types/forms.ts, then here, then render it in the form component.
+// Keep error messages short: each field reserves one line for its message.
 
 export const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -11,6 +12,9 @@ const requiredText = (message: string, maxLength: number) => ({
   validate: (value: string) => value.trim() !== "" || message,
   maxLength: { value: maxLength, message: `Please keep this under ${maxLength.toLocaleString("en-GB")} characters` },
 });
+
+/** Loose on purpose: "yourbrand.com" is as welcome as a full URL. */
+export const websitePattern = /^\s*\S+\.\S+\s*$/;
 
 const emailRules = {
   required: "Please enter your email address",
@@ -22,7 +26,7 @@ const emailRules = {
 export const brandEnquiryFields: Record<keyof BrandEnquiryValuesType, FieldCopyType> = {
   name: { label: "Name", placeholder: "Your name" },
   email: { label: "Email", placeholder: "you@company.com" },
-  company: { label: "Brand / company", placeholder: "Your brand or company" },
+  website: { label: "Company / brand website", placeholder: "https://yourbrand.com" },
   message: {
     label: "What are you looking for?",
     placeholder: "Tell us briefly about your campaign or what you'd like help with...",
@@ -32,15 +36,18 @@ export const brandEnquiryFields: Record<keyof BrandEnquiryValuesType, FieldCopyT
 export const emptyBrandEnquiry: BrandEnquiryValuesType = {
   name: "",
   email: "",
-  company: "",
+  website: "",
   message: "",
 };
 
 export const brandEnquiryRules = {
   name: requiredText("Please enter your name", 150),
   email: emailRules,
-  company: requiredText("Please tell us your brand or company", 150),
-  message: requiredText("Please tell us briefly what you're looking for", 2000),
+  website: {
+    ...requiredText("Please enter your website", 300),
+    pattern: { value: websitePattern, message: "Please enter a valid website address" },
+  },
+  message: requiredText("Please tell us what you're looking for", 2000),
 };
 
 /* --------------------------- Creator application -------------------------- */
@@ -65,6 +72,6 @@ export const emptyCreatorApplication: CreatorApplicationValuesType = {
 export const creatorApplicationRules = {
   name: requiredText("Please enter your name", 150),
   email: emailRules,
-  profile: requiredText("Please add a profile link or handle so we can see your content", 300),
-  content: requiredText("Please tell us a little about what you create", 2000),
+  profile: requiredText("Please add your profile link or handle", 300),
+  content: requiredText("Please tell us what you create", 2000),
 };

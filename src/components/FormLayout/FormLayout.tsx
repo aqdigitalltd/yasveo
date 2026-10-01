@@ -10,9 +10,9 @@ export interface IFormLayout {
   form: ReactNode;
 }
 
-/** The page's conversion point: a short intro beside the form card, on the accent wash. */
+/** The page's conversion point: a short intro beside the form card, on the soft accent tint. */
 export const FormLayout = ({ id, eyebrow, title, description, form }: IFormLayout) => (
-  <Section bg="wash" id={id} labelledBy={`${id}-heading`}>
+  <Section bg="soft" id={id} labelledBy={`${id}-heading`}>
     <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
       <SectionIntro
         id={`${id}-heading`}

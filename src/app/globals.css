@@ -2,23 +2,31 @@
 
 /*
  * YASVEO design tokens.
- * Black, white and grey carry the brand. Terracotta is the one colour and it has one job: guiding
- * attention. It fills every primary CTA and marks focus, small highlights and the form section.
+ * Warm neutrals with one accent:
+ *   near-black   the logo, primary type, the dark section and the footer
+ *   charcoal     supporting text
+ *   bone, paper  warm backgrounds and surfaces
+ *   rust         interaction and emphasis: CTAs, borders, focus, small highlights, the background line work
+ * The rust belongs to YASVEO as a whole, never to brands or creators separately. Nothing else adds colour.
  */
 @theme {
   --color-ink: #0a0a0a;
-  --color-white: #ffffff;
-  /* Light grey for an alternate section. */
-  --color-mist: #f4f4f3;
-  --color-graphite: #3a3a3a;
+  --color-charcoal: #343434;
   --color-muted: #5e5e5e;
-  /* Terracotta: AA as text on white and mist, and behind white button labels. */
-  --color-accent: #ab4522;
-  --color-accent-hover: #8e3719;
-  /* The accent as text on ink, where the base tone is too dark. */
-  --color-accent-light: #e48a64;
-  /* A pale wash of the accent, behind the form on each audience page. */
-  --color-accent-wash: #f9eee9;
+  /* The page background. */
+  --color-bone: #f7f6f3;
+  /* A slightly deeper warm tone for an alternate section. */
+  --color-paper: #efeeea;
+  /* Form fields, the form card and outlined CTAs. */
+  --color-white: #ffffff;
+  /* Rust. AA behind white button labels and as text on white; on bone or paper use accent-deep for small text. */
+  --color-accent: #c24e22;
+  /* A step darker: hover on solid CTAs, and small accent text on the warm backgrounds. */
+  --color-accent-deep: #a8401a;
+  /* The accent as text and rules on the dark section, where the base tone is too dark. */
+  --color-accent-light: #f0936b;
+  /* A pale tint of the accent, behind the form on each audience page. */
+  --color-accent-soft: #fbeee8;
   --color-error: #b3261e;
   --color-line: rgb(10 10 10 / 0.12);
   --color-line-strong: rgb(10 10 10 / 0.3);
@@ -122,7 +130,7 @@
   }
 
   body {
-    background: var(--color-white);
+    background: var(--color-bone);
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 1rem;

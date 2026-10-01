@@ -12,7 +12,7 @@ export const FormSuccess = ({ title, message }: IFormSuccess) => (
       ✓
     </span>
     <p className="heading-lg mt-7">{title}</p>
-    <p className="mt-4 max-w-[44ch] text-graphite">{message}</p>
+    <p className="mt-4 max-w-[44ch] text-charcoal">{message}</p>
   </div>
 );
 

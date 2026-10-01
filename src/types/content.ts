@@ -1,13 +1,20 @@
-/** An image from /public or a remote host allowed in next.config.ts. */
-export type ImageAssetType = {
-  src: string;
-  alt: string;
-};
-
 /** A short titled point: what we look for, process steps. */
 export type PointType = {
   title: string;
   description: string;
+};
+
+export type ComparisonSideType = {
+  heading: string;
+  traits: string[];
+};
+
+/** Two ways of judging a creator, side by side. `preferred` is the side YASVEO argues for. */
+export type ComparisonType = {
+  overlooked: ComparisonSideType;
+  preferred: ComparisonSideType;
+  /** Shown beneath when the comparison could be mistaken for data. */
+  caption?: string;
 };
 
 export type FaqItemType = {

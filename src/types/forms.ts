@@ -3,7 +3,7 @@
 export type BrandEnquiryValuesType = {
   name: string;
   email: string;
-  company: string;
+  website: string;
   message: string;
 };
 

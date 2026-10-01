@@ -28,6 +28,6 @@ export const SectionIntro = ({ id, eyebrow, title, description, className = "" }
     <h2 id={id} className="display-md mt-5">
       {title}
     </h2>
-    {description && <p className="body-lg mt-5 text-graphite on-dark:text-white/75">{description}</p>}
+    {description && <p className="body-lg mt-5 text-charcoal on-dark:text-white/75">{description}</p>}
   </div>
 );

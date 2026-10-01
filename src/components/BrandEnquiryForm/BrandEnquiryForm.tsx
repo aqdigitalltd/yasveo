@@ -42,8 +42,8 @@ export const BrandEnquiryForm = () => {
   }
 
   return (
-    <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-      <div className="grid gap-5 sm:grid-cols-2">
+    <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+      <div className="grid gap-x-5 gap-y-2 sm:grid-cols-2">
         <Input
           id="brand-name"
           label={fields.name.label}
@@ -63,12 +63,16 @@ export const BrandEnquiryForm = () => {
         />
       </div>
       <Input
-        id="brand-company"
-        label={fields.company.label}
-        placeholder={fields.company.placeholder}
-        autoComplete="organization"
-        error={errors.company?.message}
-        {...register("company", rules.company)}
+        id="brand-website"
+        label={fields.website.label}
+        placeholder={fields.website.placeholder}
+        inputMode="url"
+        autoComplete="url"
+        autoCapitalize="none"
+        autoCorrect="off"
+        spellCheck={false}
+        error={errors.website?.message}
+        {...register("website", rules.website)}
       />
       <Textarea
         id="brand-message"
@@ -80,10 +84,10 @@ export const BrandEnquiryForm = () => {
 
       <FormError message={errors.root?.message} />
 
-      <Button type="submit" withArrow disabled={isSubmitting} aria-busy={isSubmitting} className="mt-2 w-full">
+      <Button type="submit" withArrow disabled={isSubmitting} aria-busy={isSubmitting} className="mt-1 w-full">
         {isSubmitting ? "Sending…" : "Let's talk"}
       </Button>
-      <p className="text-sm text-muted">We&apos;ll only use these details to reply to your enquiry.</p>
+      <p className="mt-2 text-sm text-muted">We&apos;ll only use these details to reply to your enquiry.</p>
     </form>
   );
 };

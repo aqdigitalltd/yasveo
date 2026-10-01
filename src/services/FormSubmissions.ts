@@ -17,7 +17,7 @@ const toSubmissionFields = (
 export const submitBrandEnquiry = (values: BrandEnquiryValuesType): Promise<void> =>
   deliverSubmission({
     form: "brand-enquiry",
-    subject: `Brand enquiry: ${values.company.trim()}`,
+    subject: `Brand enquiry: ${values.website.trim()}`,
     replyTo: values.email.trim(),
     fields: toSubmissionFields(values, brandEnquiryFields),
   });
